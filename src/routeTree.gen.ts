@@ -13,6 +13,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as CustomersRouteImport } from './routes/customers'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeamIndexRouteImport } from './routes/team/index'
+import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as CampaignsIndexRouteImport } from './routes/campaigns/index'
 import { Route as BroadcastsIndexRouteImport } from './routes/broadcasts/index'
 import { Route as CampaignsNewRouteImport } from './routes/campaigns/new'
@@ -45,6 +46,11 @@ const IndexRoute = IndexRouteImport.update({
 const TeamIndexRoute = TeamIndexRouteImport.update({
   id: '/team/',
   path: '/team/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsIndexRoute = SettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CampaignsIndexRoute = CampaignsIndexRouteImport.update({
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/campaigns/new': typeof CampaignsNewRoute
   '/broadcasts/': typeof BroadcastsIndexRoute
   '/campaigns/': typeof CampaignsIndexRoute
+  '/settings/': typeof SettingsIndexRoute
   '/team/': typeof TeamIndexRoute
   '/api/automations/enroll': typeof ApiAutomationsEnrollRoute
   '/api/marketing/send-campaign': typeof ApiMarketingSendCampaignRoute
@@ -141,6 +148,7 @@ export interface FileRoutesByTo {
   '/campaigns/new': typeof CampaignsNewRoute
   '/broadcasts': typeof BroadcastsIndexRoute
   '/campaigns': typeof CampaignsIndexRoute
+  '/settings': typeof SettingsIndexRoute
   '/team': typeof TeamIndexRoute
   '/api/automations/enroll': typeof ApiAutomationsEnrollRoute
   '/api/marketing/send-campaign': typeof ApiMarketingSendCampaignRoute
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/campaigns/new': typeof CampaignsNewRoute
   '/broadcasts/': typeof BroadcastsIndexRoute
   '/campaigns/': typeof CampaignsIndexRoute
+  '/settings/': typeof SettingsIndexRoute
   '/team/': typeof TeamIndexRoute
   '/api/automations/enroll': typeof ApiAutomationsEnrollRoute
   '/api/marketing/send-campaign': typeof ApiMarketingSendCampaignRoute
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/campaigns/new'
     | '/broadcasts/'
     | '/campaigns/'
+    | '/settings/'
     | '/team/'
     | '/api/automations/enroll'
     | '/api/marketing/send-campaign'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/campaigns/new'
     | '/broadcasts'
     | '/campaigns'
+    | '/settings'
     | '/team'
     | '/api/automations/enroll'
     | '/api/marketing/send-campaign'
@@ -218,6 +229,7 @@ export interface FileRouteTypes {
     | '/campaigns/new'
     | '/broadcasts/'
     | '/campaigns/'
+    | '/settings/'
     | '/team/'
     | '/api/automations/enroll'
     | '/api/marketing/send-campaign'
@@ -238,6 +250,7 @@ export interface RootRouteChildren {
   CampaignsNewRoute: typeof CampaignsNewRoute
   BroadcastsIndexRoute: typeof BroadcastsIndexRoute
   CampaignsIndexRoute: typeof CampaignsIndexRoute
+  SettingsIndexRoute: typeof SettingsIndexRoute
   TeamIndexRoute: typeof TeamIndexRoute
   ApiAutomationsEnrollRoute: typeof ApiAutomationsEnrollRoute
   ApiMarketingSendCampaignRoute: typeof ApiMarketingSendCampaignRoute
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       path: '/team'
       fullPath: '/team/'
       preLoaderRoute: typeof TeamIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/': {
+      id: '/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/campaigns/': {
@@ -406,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   CampaignsNewRoute: CampaignsNewRoute,
   BroadcastsIndexRoute: BroadcastsIndexRoute,
   CampaignsIndexRoute: CampaignsIndexRoute,
+  SettingsIndexRoute: SettingsIndexRoute,
   TeamIndexRoute: TeamIndexRoute,
   ApiAutomationsEnrollRoute: ApiAutomationsEnrollRoute,
   ApiMarketingSendCampaignRoute: ApiMarketingSendCampaignRoute,
