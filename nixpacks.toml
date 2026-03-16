@@ -1,2 +1,5 @@
 [phases.install]
 cmds = ["npm install"]
+
+[variables]
+NODE_OPTIONS = "--max-old-space-size=2048"
